@@ -1,0 +1,42 @@
+{
+  "name": "token-liq",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^1.4.0",
+    "next": "^13.3.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "sass": "1.53.0",
+    "tw-elements": "1.0.0-alpha12",
+    "web-vitals": "2.1.4"
+  },
+  "scripts": {
+    "dev": "next dev -p 3010",
+    "build": "next build",
+    "start": "next start"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "autoprefixer": "10.4.7",
+    "postcss": "8.4.14",
+    "tailwindcss": "3.1.4"
+  }
+}
