@@ -26,24 +26,33 @@ const Assets = () => {
         );
         const formattedAssets = await Promise.all(
             filteredItems.map(async item => {
-                const contract = new web3.eth.Contract(ERC20_ABI, item.tokenInfo.address);
-                const decimals = await contract.methods.decimals().call();
-                const balanceBN = web3.utils.toBN(item.balance);
-                const decimalsBN = web3.utils.toBN(10).pow(web3.utils.toBN(decimals));
-                const balanceInTokens = balanceBN.div(decimalsBN).toString();
-                return {
-                    symbol: item.tokenInfo.symbol,
-                    balance: balanceInTokens,
-                    address: item.tokenInfo.address,
-                };
+                try {
+                    const contract = new web3.eth.Contract(ERC20_ABI, item.tokenInfo.address);
+                    const decimals = await contract.methods.decimals().call();
+                    const balanceBN = web3.utils.toBN(item.balance);
+                    const decimalsBN = web3.utils.toBN(10).pow(web3.utils.toBN(decimals));
+                    const balanceInTokens = balanceBN.div(decimalsBN).toString();
+                    return {
+                        symbol: item.tokenInfo.symbol,
+                        balance: balanceInTokens,
+                        address: item.tokenInfo.address,
+                    };
+                } catch (error) {
+                    console.error(`Failed to process asset ${item.tokenInfo.symbol} at address ${item.tokenInfo.address}: ${error}`);
+                    return null;
+                }
             })
-        );
-
+        ).then(assets => assets.filter(asset => asset !== null));
+    
         if (safe.safeAddress){
             for (const asset of formattedAssets) {
-                const contract = new web3.eth.Contract(ERC20_ABI, asset.address);
-                const allowance = await contract.methods.allowance(safe.safeAddress, BACKEND_WALLET).call();
-                asset.allowance = Number(web3.utils.fromWei(allowance, 'ether'));
+                try {
+                    const contract = new web3.eth.Contract(ERC20_ABI, asset.address);
+                    const allowance = await contract.methods.allowance(safe.safeAddress, BACKEND_WALLET).call();
+                    asset.allowance = Number(web3.utils.fromWei(allowance, 'ether'));
+                } catch (error) {
+                    console.error(`Failed to process allowance for asset ${asset.symbol} at address ${asset.address}: ${error}`);
+                }
             }
         }
         setAssets(formattedAssets);
