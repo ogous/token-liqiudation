@@ -20,5 +20,14 @@ yarn-error.log*
 package-lock.json
 
 .next
-.vscode
-.env
+.out
+.env*.local
+
+#yarn
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
