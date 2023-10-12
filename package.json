@@ -10,9 +10,11 @@
     },
     "packageManager": "yarn@3.6.4",
     "dependencies": {
+        "@headlessui/tailwindcss": "^0.2.0",
         "@types/node": "^20.4.10",
         "@types/react": "^18.2.20",
         "@types/react-dom": "^18.2.7",
+        "@web3modal/wagmi": "^3.1.0",
         "autoprefixer": "^10.4.14",
         "eslint": "^8.47.0",
         "eslint-config-next": "^13.4.13",
@@ -20,10 +22,12 @@
         "next": "^13.5.4",
         "postcss": "^8.4.27",
         "prettier": "^3.0.1",
-        "prettier-plugin-tailwindcss": "^0.5.2",
+        "prettier-plugin-tailwindcss": "^0.5.5",
         "react": "18.2.0",
         "react-dom": "18.2.0",
         "tailwindcss": "^3.3.3",
-        "typescript": "^5.1.6"
+        "typescript": "^5.1.6",
+        "viem": "^1.16.3",
+        "wagmi": "^1.4.3"
     }
 }

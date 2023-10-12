@@ -1,8 +1,12 @@
+import './global.css';
+import Providers from '@/providers';
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
-        <div>
-            Layout
-            <div>{children}</div>
-        </div>
+        <html lang="en">
+            <body>
+                <Providers>{children} </Providers>
+            </body>
+        </html>
     );
 }
