@@ -1,44 +1,36 @@
 {
-  "name": "token-liq",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@gnosis.pm/safe-apps-react-sdk": "^4.6.2",
-    "axios": "^1.4.0",
-    "next": "^13.3.0",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "sass": "1.53.0",
-    "tw-elements": "1.0.0-alpha12",
-    "web-vitals": "2.1.4",
-    "web3": "^1.10.0"
-  },
-  "scripts": {
-    "dev": "next dev -p 3010",
-    "build": "next build",
-    "start": "next start"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "autoprefixer": "10.4.7",
-    "postcss": "8.4.14",
-    "tailwindcss": "3.1.4"
-  }
+    "name": "token-liquidation-frontend",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint"
+    },
+    "packageManager": "yarn@3.6.4",
+    "dependencies": {
+        "@headlessui/tailwindcss": "^0.2.0",
+        "@types/node": "^20.4.10",
+        "@types/react": "^18.2.20",
+        "@types/react-dom": "^18.2.7",
+        "@web3modal/wagmi": "^3.1.0",
+        "autoprefixer": "^10.4.14",
+        "eslint": "^8.47.0",
+        "eslint-config-next": "^13.4.13",
+        "eslint-config-prettier": "^9.0.0",
+        "ethers": "^6.8.0",
+        "next": "^13.5.4",
+        "postcss": "^8.4.27",
+        "prettier": "^3.0.1",
+        "prettier-plugin-tailwindcss": "^0.5.5",
+        "react": "18.2.0",
+        "react-dom": "18.2.0",
+        "react-hot-toast": "^2.4.1",
+        "siwe": "^2.1.4",
+        "tailwindcss": "^3.3.3",
+        "typescript": "^5.1.6",
+        "viem": "^1.16.3",
+        "wagmi": "^1.4.3"
+    }
 }

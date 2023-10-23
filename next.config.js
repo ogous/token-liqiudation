@@ -1,27 +1,17 @@
-module.exports = {
-    async headers() {
-      return [
-        {
-          source: '/(.*)',
-          headers: [
-            {
-              key: "Access-Control-Allow-Origin",
-              value: '*',
-            },
-            {
-              key: "Access-Control-Allow-Methods",
-              value: 'GET',
-            },
-            {
-              key: "Access-Control-Allow-Headers",
-              value: 'X-Requested-With, content-type, Authorization',
-            },
-            {
-                key: 'Content-Security-Policy',
-                value: "frame-ancestors 'self' https://app.safe.global;",
-            },
-          ],
-        },
-      ]
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+    webpack: (config) => {
+        config.externals.push('pino-pretty', 'lokijs', 'encoding');
+        return config;
     },
-  }
+    async rewrites() {
+        return [
+            {
+                source: '/api/auth/:path*',
+                destination: `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/:path*`,
+            },
+        ];
+    },
+};
+
+module.exports = nextConfig;
