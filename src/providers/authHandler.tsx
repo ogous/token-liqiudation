@@ -6,7 +6,7 @@ import { SiweMessage } from 'siwe';
 import { SignMessageArgs } from 'wagmi/actions';
 import { useEffect } from 'react';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
-const backend = process.env.NEXT_PUBLIC_ADMIN_BACKEND_URL;
+import toast from 'react-hot-toast';
 const chainId = Number(process.env.NEXT_PUBLIC_CHAIN_ID);
 const ALLOWED_ADMINS = process.env.NEXT_PUBLIC_ALLOWED_ADMINS;
 
@@ -17,7 +17,7 @@ async function createSiweMessage(address: `0x${string}` | undefined, statement: 
         if (!chainId || isNaN(chainId)) throw new Error('Valid Chain ID is missing current environment.');
         if (!address || !statement) throw new Error('Parameters are missing: Address and statement are required.');
 
-        const res = await fetch(`${backend}/auth/nonce`, {
+        const res = await fetch('/api/auth/nonce', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ async function signInWithEthereum(
 
         const signature = await signMessage({ message });
 
-        const res = await fetch(`${backend}/auth/verify`, {
+        const res = await fetch('api/auth/verify', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -81,21 +81,21 @@ export async function onConnect({ address, signMessageAsync, router }: onConnect
         try {
             const res = await signInWithEthereum(address, signMessageAsync);
             if (res) {
-                router.push('/admin/requests');
+                toast.success('Authorized');
             }
         } catch (e) {
             console.error(e instanceof Error ? e.message : 'Unknown');
-            router.push('/admin/not-authorized');
+            toast.error(e instanceof Error ? e.message : 'Unknown');
         }
     } else {
-        router.push('/admin/not-authorized');
+        toast.error('You are not an admin');
     }
 }
 interface onDisconnectProps {
     router: AppRouterInstance;
 }
 async function onDisconnect({ router }: onDisconnectProps) {
-    const res = await fetch(backend + '/auth/signout', {
+    const res = await fetch('api/auth/signout', {
         credentials: 'include',
     });
     const data = await res.text();
